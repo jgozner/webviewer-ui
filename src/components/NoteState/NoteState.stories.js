@@ -37,8 +37,9 @@ function rootReducer(state = initialState, action) {
 const store = createStore(rootReducer);
 
 export function Basic() {
-  const availableNoteStates = ['Accepted', 'Rejected', 'Cancelled', 'Completed', 'None', 'Marked', 'Unmarked'];
+  const availableNoteStates = ['Clarification', 'Revision', 'Change Notification'];
   const allStates = availableNoteStates.map((state) => {
+    console.log('ALL STATES:' ,allStates);
     return (
       <Provider store={store} key={state}>
         <React.Fragment key={state}>
@@ -75,7 +76,7 @@ export function PopupOpen() {
         }}
       >
         <NoteState
-          annotation={getAnnotationWithStatus('Accepted')}
+          annotation={getAnnotationWithStatus('Clarification')}
           isSelected={false}
           openOnInitialLoad
           handleStateChange={handleStateChange}

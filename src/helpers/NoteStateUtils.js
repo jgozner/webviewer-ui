@@ -17,6 +17,7 @@ function createStateAnnotation(annotation, state, documentViewerKey = 1) {
   stateAnnotation['Subject'] = 'Sticky Note';
   stateAnnotation['Author'] = core.getCurrentUser();
   stateAnnotation['State'] = state;
+  stateAnnotation['__state'] = state==='Revision' || state === 'Clarification' ? i18next.t(`option.state.${state.toLowerCase()}`) : i18next.t(`option.state.${state}`) ;
   stateAnnotation['StateModel'] = state === 'Marked' || state === 'Unmarked' ? 'Marked' : 'Review';
   stateAnnotation['Hidden'] = true;
   stateAnnotation.enableSkipAutoLink();

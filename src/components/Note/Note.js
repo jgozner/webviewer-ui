@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import NoteContext from 'components/Note/Context';
 import NoteContent from 'components/NoteContent';
-import ReplyArea from 'components/Note/ReplyArea';
 import NoteGroupSection from 'components/Note/NoteGroupSection';
 import Button from 'components/Button';
 
@@ -223,8 +222,6 @@ const Note = ({
     }
   }, [isMultiSelectMode]);
 
-  const showReplyArea = !Object.values(isEditingMap).some((val) => val);
-
   const handleNoteKeydown = (e) => {
     // Click if enter or space is pressed and is current target.
     const isNote = e.target === e.currentTarget;
@@ -270,8 +267,6 @@ const Note = ({
     isMultiSelected = false;
   }
   const isTrackedChange = mapAnnotationToKey(annotation) === annotationMapKeys.TRACKED_CHANGE;
-  // apply unread reply style to replyArea if the last reply is unread
-  const lastReplyId = replies.length > 0 ? replies[replies.length - 1].Id : null;
 
   return (
     <div
@@ -297,50 +292,43 @@ const Note = ({
         isMultiSelected={isMultiSelected}
         isMultiSelectMode={isMultiSelectMode}
       />
-      {(isSelected || isExpandedFromSearch || shouldExpandCommentThread) && !isTrackedChange && (
-        <>
-          {replies.length > 0 && (
-            <div className={repliesClass}>
-              {hasUnreadReplies && (
-                <Button
-                  dataElement="markAllReadButton"
-                  className="mark-all-read-button"
-                  label={t('action.markAllRead')}
-                  onClick={markAllRepliesRead}
-                />
-              )}
-              {replies.map((reply, i) => (
-                <div className="reply" id={`note_reply_${reply.Id}`} key={`note_reply_${reply.Id}`}>
-                  <NoteContent
-                    noteIndex={i + 1}
-                    key={reply.Id}
-                    annotation={reply}
-                    setIsEditing={setIsEditing}
-                    isEditing={isEditingMap[i + 1]}
-                    onReplyClicked={handleReplyClicked}
-                    isUnread={unreadAnnotationIdSet.has(reply.Id)}
-                    handleMultiSelect={handleMultiSelect}
-                    isMultiSelected={isMultiSelected}
-                    isMultiSelectMode={isMultiSelectMode}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-          {isGroup &&
-            <NoteGroupSection
-              groupAnnotations={groupAnnotations}
-              isMultiSelectMode={isMultiSelectMode}
-            />}
-          {showReplyArea && !isMultiSelectMode && (
-            <ReplyArea
-              isUnread={lastReplyId && unreadAnnotationIdSet.has(lastReplyId)}
-              onPendingReplyChange={markAllRepliesRead}
-              annotation={annotation}
-            />
-          )}
-        </>
-      )}
+      {/*{(isSelected || isExpandedFromSearch || shouldExpandCommentThread) && !isTrackedChange && (*/}
+      {/*  <>*/}
+      {/*    {replies.length > 0 && (*/}
+      {/*      <div className={repliesClass}>*/}
+      {/*        {hasUnreadReplies && (*/}
+      {/*          <Button*/}
+      {/*            dataElement="markAllReadButton"*/}
+      {/*            className="mark-all-read-button"*/}
+      {/*            label={t('action.markAllRead')}*/}
+      {/*            onClick={markAllRepliesRead}*/}
+      {/*          />*/}
+      {/*        )}*/}
+      {/*        {replies.map((reply, i) => (*/}
+      {/*          <div className="reply" id={`note_reply_${reply.Id}`} key={`note_reply_${reply.Id}`}>*/}
+      {/*            <NoteContent*/}
+      {/*              noteIndex={i + 1}*/}
+      {/*              key={reply.Id}*/}
+      {/*              annotation={reply}*/}
+      {/*              setIsEditing={setIsEditing}*/}
+      {/*              isEditing={isEditingMap[i + 1]}*/}
+      {/*              onReplyClicked={handleReplyClicked}*/}
+      {/*              isUnread={unreadAnnotationIdSet.has(reply.Id)}*/}
+      {/*              handleMultiSelect={handleMultiSelect}*/}
+      {/*              isMultiSelected={isMultiSelected}*/}
+      {/*              isMultiSelectMode={isMultiSelectMode}*/}
+      {/*            />*/}
+      {/*          </div>*/}
+      {/*        ))}*/}
+      {/*      </div>*/}
+      {/*    )}*/}
+      {/*    {isGroup &&*/}
+      {/*      <NoteGroupSection*/}
+      {/*        groupAnnotations={groupAnnotations}*/}
+      {/*        isMultiSelectMode={isMultiSelectMode}*/}
+      {/*      />}*/}
+      {/*  </>*/}
+      {/*)}*/}
       {isSelected && (isInNotesPanel || isCustomPanelOpen) && !shouldHideConnectorLine && (
         <AnnotationNoteConnectorLine
           annotation={annotation}

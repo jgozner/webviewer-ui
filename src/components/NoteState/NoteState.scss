@@ -22,18 +22,21 @@
   }
 
   .overflow {
-    width: 28px;
-    height: 28px;
+    width: auto;
+    max-width: 100px;
+    height: 30px;
     border-radius: 4px;
-
-    .Icon {
-      margin: 4px;
-      width: 20px;
-      height: 20px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    padding: 4px;
 
     &:hover {
-      background: var(--blue-1)
+      background: white;
     }
 
     &.active {

@@ -31,7 +31,7 @@ import logDebugInfo from 'helpers/logDebugInfo';
 import getHashParameters from 'helpers/getHashParameters';
 import { addDocumentViewer, setupOpenURLHandler } from 'helpers/documentViewerHelper';
 import setEnableAnnotationNumbering from 'helpers/setEnableAnnotationNumbering';
-import getRootNode from 'helpers/getRootNode';
+import getRootNode, { getInstanceNode } from 'helpers/getRootNode';
 import { setItemToFlyoutStore } from 'helpers/itemToFlyoutHelper';
 
 import './index.scss';
@@ -162,6 +162,8 @@ if (window.CanvasRenderingContext2D) {
 
   logDebugInfo();
   const documentViewer = addDocumentViewer(1);
+  console.log(documentViewer);
+
   setupOpenURLHandler(documentViewer, store);
 
   if (getHashParameters('hideDetachedReplies', false)) {

@@ -166,7 +166,7 @@ export default {
         },
         {
           type: 'customElement',
-          render: () => <ToggleZoomOverlay />,
+          render: () => <ToggleZoomOverlay/>,
           dataElement: DataElements.ZOOM_OVERLAY_BUTTON,
           element: DataElements.ZOOM_OVERLAY,
           hiddenOnMobileDevice: true,
@@ -177,7 +177,7 @@ export default {
         { type: 'toolButton', toolName: 'AnnotationEdit', hidden: ['small-mobile', 'mobile'] },
         {
           type: 'customElement',
-          render: () => <Ribbons />,
+          render: () => <Ribbons/>,
           className: 'custom-ribbons-container',
         },
         // {
@@ -318,7 +318,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -400,7 +400,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -429,7 +429,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -500,7 +500,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -563,7 +563,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -674,7 +674,7 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
@@ -736,14 +736,14 @@ export default {
         { type: 'divider' },
         {
           type: 'customElement',
-          render: () => <ToolsOverlay />,
+          render: () => <ToolsOverlay/>,
           dataElement: 'toolsOverlay',
           hidden: ['small-mobile', 'mobile'],
         },
         {
           type: 'customElement',
           dataElement: 'applyFormFieldsButton',
-          render: () => <ApplyFormFieldButton />,
+          render: () => <ApplyFormFieldButton/>,
         },
         { type: 'spacer', hidden: ['mobile', 'small-mobile'] },
       ],
@@ -1745,7 +1745,11 @@ export default {
         showColor: 'never',
       },
       TextSelect: { dataElement: 'textSelectButton', img: 'icon-header-select-line', showColor: 'never' },
-      OfficeEditorContentSelect: { dataElement: 'textSelectButton', img: 'icon-header-select-line', showColor: 'never' },
+      OfficeEditorContentSelect: {
+        dataElement: 'textSelectButton',
+        img: 'icon-header-select-line',
+        showColor: 'never'
+      },
       MarqueeZoomTool: { dataElement: 'marqueeToolButton', showColor: 'never' },
       AnnotationEraserTool: {
         dataElement: 'eraserToolButton',
@@ -2059,6 +2063,10 @@ export default {
     ],
     contentBoxEditor: null,
     notesPanelCustomHeaderOptions: null,
+    notesButtonAreaOptions: null,
+    notesStatusTagAreaOptions: null,
+    notesPanelAnnotationInfo: null,
+    notesPanelDocumentInfo: null,
     notesPanelCustomEmptyPanel: null,
     replyAttachmentPreviewEnabled: true,
     savedSignatureTabEnabled: false,

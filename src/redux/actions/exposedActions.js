@@ -1121,6 +1121,26 @@ export const setNotesPanelEmptyPanel = (notesPanelCustomEmptyPanel) => ({
   payload: { notesPanelCustomEmptyPanel },
 });
 
+export const setNotesButtonArea = (notesButtonAreaOptions) => ({
+  type: 'SET_NOTES_BUTTON_AREA_OPTIONS',
+  payload: { notesButtonAreaOptions },
+});
+
+export const setNotesStatusTagArea = (notesStatusTagAreaOptions) => ({
+  type: 'SET_NOTES_STATUS_TAG_AREA_OPTIONS',
+  payload: { notesStatusTagAreaOptions },
+});
+
+export const setNotesPanelAnnotationInfo = (notesPanelAnnotationInfo) => ({
+  type: 'SET_NOTES_PANEL_ANNOTATION_INFO',
+  payload: { notesPanelAnnotationInfo },
+});
+
+export const setNotesPanelDocumentInfo = (notesPanelDocumentInfo) => ({
+  type: 'SET_NOTES_PANEL_DOCUMENT_INFO',
+  payload: { notesPanelDocumentInfo },
+});
+
 export const addMeasurementScalePreset = (measurementSystem, newPreset, index) => ({
   type: 'ADD_MEASUREMENT_SCALE_PRESET',
   payload: { measurementSystem, newPreset, index }

@@ -8,6 +8,10 @@ import classNames from 'classnames';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import isString from 'lodash/isString';
 
+import NoteButtonArea from 'components/NoteButtonArea';
+import NoteStatusTagArea from 'components/NoteStatusTagArea';
+import NotePanelAnnotationInfo from 'components/NotePanelAnnotationInfo';
+import NotePanelDocumentInfo from 'components/NotePanelDocumentInfo';
 import NoteTextarea from 'components/NoteTextarea';
 import NoteContext from 'components/Note/Context';
 import NoteHeader from 'components/NoteHeader';
@@ -72,6 +76,10 @@ const NoteContent = ({
     canCollapseReplyPreview,
     activeTheme,
     timezone,
+    customButtonArea,
+    customStatusTagArea,
+    customPanelAnnotationInfo,
+    customPanelDocumentInfo
   ] = useSelector(
     (state) => [
       selectors.getNoteDateFormat(state),
@@ -83,6 +91,10 @@ const NoteContent = ({
       selectors.isNotesPanelRepliesCollapsingEnabled(state),
       selectors.getActiveTheme(state),
       selectors.getTimezone(state),
+      selectors.getNotesButtonAreaOptions(state),
+      selectors.getNotesStatusTagAreaOptions(state),
+      selectors.getNotesPanelAnnotationInfo(state),
+      selectors.getNotesPanelDocumentInfo(state)
     ],
     shallowEqual,
   );
@@ -441,9 +453,56 @@ const NoteContent = ({
     }, [icon, iconColor, annotation, language, noteDateFormat, isSelected, setIsEditing, notesShowLastUpdatedDate, isReply, isUnread, renderAuthorName, core.getDisplayAuthor(annotation['Author']), isNoteStateDisabled, isEditing, noteIndex, getLatestActivityDate(annotation), sortStrategy, handleMultiSelect, isMultiSelected, isMultiSelectMode, isGroupMember, timezone, isTrackedChange]
   );
 
+  const buttonArea = useMemo(() => {
+
+    const buttons = customButtonArea ? customButtonArea.buttons : null;
+
+    if (buttons) {
+      return (
+        <NoteButtonArea
+          buttons={buttons}
+        />
+      );
+    }
+  });
+
+  const statusTagArea = useMemo(() => {
+
+    const tag = customStatusTagArea ? customStatusTagArea.tag : null;
+
+    if (tag) {
+      return (
+        <NoteStatusTagArea
+          tag={tag}
+        />
+      );
+    }
+  });
+
+  const panelAnnotationInfo = useMemo(() => {
+    const annotInfo = customPanelAnnotationInfo ? customPanelAnnotationInfo.annotInfo : null;
+
+    if (annotInfo) {
+      return (<NotePanelAnnotationInfo annotInfo={annotInfo}/>);
+    }
+  });
+
+  const panelDocumentInfo = useMemo(() => {
+    const docInfo = customPanelDocumentInfo ? customPanelDocumentInfo.docInfo : null;
+
+    if (docInfo) {
+      return (<NotePanelDocumentInfo docInfo={docInfo}/>);
+    }
+  });
+
+
   return (
     <div className={noteContentClass} onClick={handleNoteContentClicked}>
+      {panelAnnotationInfo}
+      {panelDocumentInfo}
       {header}
+      {statusTagArea}
+      {buttonArea}
       {textPreview}
       {content}
     </div>

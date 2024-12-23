@@ -84,7 +84,6 @@ function NoteHeader(props) {
     date = dateCreated;
   }
 
-  const numberOfReplies = annotation.getReplies().length;
   let color = annotation[iconColor]?.toHexString?.();
 
   if (activeTheme === Theme.DARK && color && isDarkColorHex(color)) {
@@ -108,24 +107,21 @@ function NoteHeader(props) {
     const trackedChangeId = trackedChangeAnnot.getCustomData(OFFICE_EDITOR_TRACKED_CHANGE_KEY);
     core.getOfficeEditor().rejectTrackedChange(trackedChangeId);
   };
-
   return (
     <div className={noteHeaderClass}>
-      {!isReply &&
+      {!isReply && (
         <div className="type-icon-container">
-          {isUnread &&
-            <div className="unread-notification"></div>
-          }
-          <Icon className="type-icon" glyph={icon} color={color} fillColor={fillColor} />
+          {isUnread && <div className="unread-notification"></div>}
+          <Icon className="type-icon" glyph={icon} color={color} fillColor={fillColor}/>
         </div>
-      }
+      )}
       <div className={authorAndDateClass}>
         <div className="author-and-overflow">
           <div className="author-and-time">
             <div className="author">
-              {showAnnotationNumbering && annotationAssociatedNumber !== undefined &&
+              {showAnnotationNumbering && annotationAssociatedNumber !== undefined && (
                 <span className="annotation-number">{annotationDisplayedAssociatedNumber}</span>
-              }
+              )}
               {renderAuthorName(annotation)}
             </div>
             <div className="date-and-num-replies">
@@ -133,15 +129,10 @@ function NoteHeader(props) {
                 {date ? dayjs(date).locale(language).format(noteDateFormat) : t('option.notesPanel.noteContent.noDate')}
                 {isGroupMember && ` (Page ${annotation.PageNumber})`}
               </div>
-              {numberOfReplies > 0 && !isSelected &&
-                <div className="num-replies-container">
-                  <Icon className="num-reply-icon" glyph='icon-chat-bubble' />
-                  <div className="num-replies">{numberOfReplies}</div>
-                </div>}
             </div>
           </div>
           <div className="state-and-overflow">
-            {isMultiSelectMode && !isGroupMember && !isReply &&
+            {isMultiSelectMode && !isGroupMember && !isReply && (
               <Choice
                 id={`note-multi-select-toggle_${annotation.Id}`}
                 checked={isMultiSelected}
@@ -151,38 +142,24 @@ function NoteHeader(props) {
                   handleMultiSelect(!isMultiSelected);
                 }}
               />
-            }
-            <NoteUnpostedCommentIndicator annotationId={annotation.Id} />
-            {!isNoteStateDisabled && !isReply && !isMultiSelectMode && !isGroupMember && !isTrackedChange &&
-              <NoteState
-                annotation={annotation}
-                isSelected={isSelected}
-              />
-            }
-            {!isEditing && isSelected && !isMultiSelectMode && !isGroupMember && !isTrackedChange &&
-              <NotePopup
-                noteIndex={noteIndex}
-                annotation={annotation}
-                setIsEditing={setIsEditing}
-                isReply={isReply}
-              />
-            }
-            {isSelected && isTrackedChange && !isMultiSelectMode &&
+            )}
+            <NoteUnpostedCommentIndicator annotationId={annotation.Id}/>
+            {!isNoteStateDisabled && !isReply && !isMultiSelectMode && !isGroupMember && !isTrackedChange && (
+              <NoteState annotation={annotation} isSelected={isSelected}/>
+            )}
+            {!isEditing && isSelected && !isMultiSelectMode && !isGroupMember && !isTrackedChange && (
+              <NotePopup noteIndex={noteIndex} annotation={annotation} setIsEditing={setIsEditing} isReply={isReply}/>
+            )}
+            {isSelected && isTrackedChange && !isMultiSelectMode && (
               <>
-                <div
-                  className="tracked-change-icon-wrapper"
-                  onClick={() => acceptTrackedChange(annotation)}
-                >
-                  <Icon className="tracked-change-icon" glyph="icon-menu-checkmark" />
+                <div className="tracked-change-icon-wrapper" onClick={() => acceptTrackedChange(annotation)}>
+                  <Icon className="tracked-change-icon" glyph="icon-menu-checkmark"/>
                 </div>
-                <div
-                  className="tracked-change-icon-wrapper"
-                  onClick={() => rejectTrackedChange(annotation)}
-                >
-                  <Icon className="tracked-change-icon" glyph="icon-close" />
+                <div className="tracked-change-icon-wrapper" onClick={() => rejectTrackedChange(annotation)}>
+                  <Icon className="tracked-change-icon" glyph="icon-close"/>
                 </div>
               </>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -191,5 +168,4 @@ function NoteHeader(props) {
 }
 
 NoteHeader.propTypes = propTypes;
-
 export default NoteHeader;

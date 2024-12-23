@@ -6,7 +6,7 @@ import Tooltip from '../Tooltip';
 import NoteStatePopup from './NoteStatePopup';
 
 import DataElementWrapper from 'components/DataElementWrapper';
-import Icon from 'components/Icon';
+//import Icon from 'components/Icon';
 
 import './NoteState.scss';
 
@@ -37,7 +37,7 @@ function NoteState(props) {
   };
 
   const annotationState = annotation.getStatus();
-  const icon = `icon-annotation-status-${annotationState === '' ? 'none' : annotationState.toLowerCase()}`;
+  //const icon = `icon-annotation-status-${annotationState === '' ? 'none' : annotationState.toLowerCase()}`;
   const noteStateButtonClassName = classNames('overflow', { active: isOpen });
   const dataElement = 'noteState';
   const id = annotation.Id;
@@ -52,7 +52,8 @@ function NoteState(props) {
     >
       <Tooltip content={t('option.notesOrder.status')}>
         <div className={noteStateButtonClassName}>
-          <Icon glyph={icon} />
+          {annotationState || 'none'}
+          {/*<Icon glyph={icon} />*/}
         </div>
       </Tooltip>
       {isOpen && (

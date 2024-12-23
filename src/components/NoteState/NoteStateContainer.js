@@ -21,6 +21,7 @@ function NoteStateContainer(props) {
   const { annotation } = props;
 
   const handleStateChange = React.useCallback(function handleStateChangeCallback(newValue) {
+    //annotation.setStatus(newValue);
     const stateAnnotation = createStateAnnotation(annotation, newValue, activeDocumentViewerKey);
     annotation.addReply(stateAnnotation);
     const annotationManager = core.getAnnotationManager(activeDocumentViewerKey);

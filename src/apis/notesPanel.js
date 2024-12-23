@@ -102,32 +102,32 @@ const enableAutoExpandCommentThread = (store) => () => {
  * @param {boolean} [options.overwriteDefaultHeader=false] Replaces original notes panel header with content in render function.
  * @param {UI.NotesPanel.renderCustomHeader} options.render Callback function that returns custom elements to be prepended or to completely overwrite the default header. This function will receive the array of notes as an argument.
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.setCustomHeader({
-      overwriteDefaultHeader: true,
-      render: (notes) => {
-        const div = document.createElement('div');
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.setCustomHeader({
+ overwriteDefaultHeader: true,
+ render: (notes) => {
+ const div = document.createElement('div');
 
-        const header = document.createElement('h2');
-        header.innerHTML = 'Custom header goes here!';
-        div.appendChild(header);
+ const header = document.createElement('h2');
+ header.innerHTML = 'Custom header goes here!';
+ div.appendChild(header);
 
-        const subheader = document.createElement('h3');
-        subheader.innerHTML = `Number of notes: ${notes.length}`;
-        div.appendChild(subheader);
+ const subheader = document.createElement('h3');
+ subheader.innerHTML = `Number of notes: ${notes.length}`;
+ div.appendChild(subheader);
 
-        const button = document.createElement('button');
-        button.innerHTML = 'Back to Issues';
-        button.addEventListener('click', () => {
-            alert('Clicked button!');
-        });
-        div.appendChild(button);
+ const button = document.createElement('button');
+ button.innerHTML = 'Back to Issues';
+ button.addEventListener('click', () => {
+ alert('Clicked button!');
+ });
+ div.appendChild(button);
 
-        return div;
-      }
-    });
-  });
+ return div;
+ }
+ });
+ });
  */
 
 /**
@@ -150,41 +150,57 @@ const setCustomHeader = (store) => (customHeader) => {
  * @param {boolean} [options.hideIcon=false] Hides icon if true.
  * @param {UI.NotesPanel.renderCustomHeader} [options.render] Callback function that returns custom elements to render in empty notes panel. Overwrites all other properties if provided.
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.setCustomEmptyPanel({
-      icon: '<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><style>.cls-1{fill:#dfe2ed;}</style></defs><title>Artboard 1</title><path class="cls-1" d="M50,4.5H14A3.5,3.5,0,0,0,10.5,8V56A3.5,3.5,0,0,0,14,59.5H50A3.5,3.5,0,0,0,53.5,56V8A3.5,3.5,0,0,0,50,4.5ZM50.5,56a.5.5,0,0,1-.5.5H14a.5.5,0,0,1-.5-.5V8a.5.5,0,0,1,.5-.5H50a.5.5,0,0,1,.5.5Z"/><circle class="cls-1" cx="20.5" cy="32" r="2.5"/><circle class="cls-1" cx="20.5" cy="44.3" r="2.5"/><circle class="cls-1" cx="20.5" cy="19.7" r="2.5"/><rect class="cls-1" x="25.98" y="30.26" width="20.02" height="3.49"/><rect class="cls-1" x="25.98" y="42.55" width="20.02" height="3.49"/><polygon class="cls-1" points="25.98 17.96 25.98 21.45 46 21.45 46 17.96 44 17.96 25.98 17.96"/></svg>',
-      message: 'Here is a custom message to show when the Notes Panel is empty.'
-    });
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.setCustomEmptyPanel({
+ icon: '<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><style>.cls-1{fill:#dfe2ed;}</style></defs><title>Artboard 1</title><path class="cls-1" d="M50,4.5H14A3.5,3.5,0,0,0,10.5,8V56A3.5,3.5,0,0,0,14,59.5H50A3.5,3.5,0,0,0,53.5,56V8A3.5,3.5,0,0,0,50,4.5ZM50.5,56a.5.5,0,0,1-.5.5H14a.5.5,0,0,1-.5-.5V8a.5.5,0,0,1,.5-.5H50a.5.5,0,0,1,.5.5Z"/><circle class="cls-1" cx="20.5" cy="32" r="2.5"/><circle class="cls-1" cx="20.5" cy="44.3" r="2.5"/><circle class="cls-1" cx="20.5" cy="19.7" r="2.5"/><rect class="cls-1" x="25.98" y="30.26" width="20.02" height="3.49"/><rect class="cls-1" x="25.98" y="42.55" width="20.02" height="3.49"/><polygon class="cls-1" points="25.98 17.96 25.98 21.45 46 21.45 46 17.96 44 17.96 25.98 17.96"/></svg>',
+ message: 'Here is a custom message to show when the Notes Panel is empty.'
+ });
 
-    instance.UI.NotesPanel.setCustomEmptyPanel({
-      hideIcon: false,
-      readOnlyMessage: 'A different custom message if Notes Panel is empty and document is read-only.'
-    });
+ instance.UI.NotesPanel.setCustomEmptyPanel({
+ hideIcon: false,
+ readOnlyMessage: 'A different custom message if Notes Panel is empty and document is read-only.'
+ });
 
-    instance.UI.NotesPanel.setCustomEmptyPanel({
-      render: () => {
-        const div = document.createElement('div');
-        const header = document.createElement('h2');
-        header.innerHTML = 'Custom empty content goes here!';
-        div.appendChild(header);
-        return div;
-      }
-    });
-  });
-*/
+ instance.UI.NotesPanel.setCustomEmptyPanel({
+ render: () => {
+ const div = document.createElement('div');
+ const header = document.createElement('h2');
+ header.innerHTML = 'Custom empty content goes here!';
+ div.appendChild(header);
+ return div;
+ }
+ });
+ });
+ */
 const setCustomEmptyPanel = (store) => (options) => {
   store.dispatch(actions.setNotesPanelEmptyPanel(options));
+};
+
+const setNoteButtonArea = (store) => (options) => {
+  store.dispatch(actions.setNotesButtonArea(options));
+};
+
+const setNoteStatusTagArea = (store) => (options) => {
+  store.dispatch(actions.setNotesStatusTagArea(options));
+};
+
+const setNotePanelAnnotationInfo = (store) => (options) => {
+  store.dispatch(actions.setNotesPanelAnnotationInfo(options));
+};
+
+const setNotePanelDocumentInfo = (store) => (options) => {
+  store.dispatch(actions.setNotesPanelDocumentInfo(options));
 };
 
 /**
  * Enable the preview of attachments.
  * @method UI.NotesPanel.enableAttachmentPreview
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.enableAttachmentPreview();
-  });
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.enableAttachmentPreview();
+ });
  */
 const enableAttachmentPreview = (store) => () => {
   store.dispatch(actions.setReplyAttachmentPreviewEnabled(true));
@@ -194,10 +210,10 @@ const enableAttachmentPreview = (store) => () => {
  * Disable the preview of attachments.
  * @method UI.NotesPanel.disableAttachmentPreview
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.disableAttachmentPreview();
-  });
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.disableAttachmentPreview();
+ });
  */
 const disableAttachmentPreview = (store) => () => {
   store.dispatch(actions.setReplyAttachmentPreviewEnabled(false));
@@ -207,10 +223,10 @@ const disableAttachmentPreview = (store) => () => {
  * Disable multi select in the notes panel
  * @method UI.NotesPanel.disableMultiSelect
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.disableMultiSelect();
-  });
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.disableMultiSelect();
+ });
  */
 const disableMultiSelect = (store) => () => {
   store.dispatch(actions.setNotesPanelMultiSelect(false));
@@ -227,31 +243,31 @@ const disableMultiSelect = (store) => () => {
  * @method UI.NotesPanel.setAttachmentHandler
  * @param {UI.NotesPanel.attachmentHandler} handler The handler function
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.setAttachmentHandler(async (file) => {
-      const uploadedURL = await aws.upload(file); //e.g. https://pdftron.s3.amazonaws.com/downloads/pl/demo.pdf
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.setAttachmentHandler(async (file) => {
+ const uploadedURL = await aws.upload(file); //e.g. https://pdftron.s3.amazonaws.com/downloads/pl/demo.pdf
 
-      return uploadedURL;
-    });
-  });
+ return uploadedURL;
+ });
+ });
  */
 const setAttachmentHandler = (store) => (attachmentHandler) => {
   store.dispatch(actions.setReplyAttachmentHandler(attachmentHandler));
 };
 
 /**
-* Enables the capability to filter by different measurement types in the comments panel filter.
-* For example, line annotations can also be distance measurements. Enabling this API would allow you to
-* filter by line annotations and distance measurements separately.
-* This API is disabled by default.
-* @method UI.NotesPanel.enableMeasurementAnnotationFilter
-* @example
-WebViewer(...)
-.then(function(instance) {
-  instance.UI.NotesPanel.enableMeasurementAnnotationFilter();
-});
-*/
+ * Enables the capability to filter by different measurement types in the comments panel filter.
+ * For example, line annotations can also be distance measurements. Enabling this API would allow you to
+ * filter by line annotations and distance measurements separately.
+ * This API is disabled by default.
+ * @method UI.NotesPanel.enableMeasurementAnnotationFilter
+ * @example
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.enableMeasurementAnnotationFilter();
+ });
+ */
 const enableMeasurementAnnotationFilter = (store) => () => {
   store.dispatch(actions.setEnableMeasurementAnnotationsFilter(true));
 };
@@ -261,10 +277,10 @@ const enableMeasurementAnnotationFilter = (store) => () => {
  * For example, if your document has line annotations and distance measurement annotations, they would be consolidated into one filter option: Line Annotation.
  * @method UI.NotesPanel.disableMeasurementAnnotationFilter
  * @example
-WebViewer(...)
-  .then(function(instance) {
-    instance.UI.NotesPanel.disableMeasurementAnnotationFilter();
-  });
+ WebViewer(...)
+ .then(function(instance) {
+ instance.UI.NotesPanel.disableMeasurementAnnotationFilter();
+ });
  */
 const disableMeasurementAnnotationFilter = (store) => () => {
   store.dispatch(actions.setEnableMeasurementAnnotationsFilter(false));
@@ -280,6 +296,10 @@ export {
   enableAutoExpandCommentThread,
   setCustomHeader,
   setCustomEmptyPanel,
+  setNoteButtonArea,
+  setNoteStatusTagArea,
+  setNotePanelAnnotationInfo,
+  setNotePanelDocumentInfo,
   enableAttachmentPreview,
   disableAttachmentPreview,
   disableMultiSelect,

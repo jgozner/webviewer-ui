@@ -5,7 +5,7 @@ import DataElements from 'constants/dataElement';
 
 import DataElementWrapper from 'components/DataElementWrapper';
 import PopupPortal from 'components/PopupPortal';
-import Icon from 'components/Icon';
+//import Icon from 'components/Icon';
 import getOverlayPositionBasedOn from 'helpers/getOverlayPositionBasedOn';
 import PropTypes from 'prop-types';
 import getRootNode from 'helpers/getRootNode';
@@ -63,61 +63,61 @@ const NoteStatePopup = ({
       >
         <DataElementWrapper dataElement="notePopupState">
           <DataElementWrapper
-            dataElement="notePopupStateAccepted"
+            dataElement="notePopupStateClarification"
             className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Accepted')}
+            onClick={createOnStateOptionButtonClickHandler('Clarification')}
           >
-            <Icon glyph="icon-annotation-status-accepted" />
-            {t('option.state.accepted')}
+            {/*<Icon glyph="icon-annotation-status-accepted" />*/}
+            {t('option.state.clarification')}
           </DataElementWrapper>
           <DataElementWrapper
-            dataElement="notePopupStateRejected"
+            dataElement="notePopupStateRevision"
             className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Rejected')}
+            onClick={createOnStateOptionButtonClickHandler('Revision')}
           >
-            <Icon glyph="icon-annotation-status-rejected" />
-            {t('option.state.rejected')}
+            {/*<Icon glyph="icon-annotation-status-rejected" />*/}
+            {t('option.state.revision')}
           </DataElementWrapper>
+          {/*<DataElementWrapper*/}
+          {/*  dataElement="notePopupStateCancelled"*/}
+          {/*  className="note-state-option"*/}
+          {/*  onClick={createOnStateOptionButtonClickHandler('Cancelled')}*/}
+          {/*>*/}
+          {/*  <Icon glyph="icon-annotation-status-cancelled" />*/}
+          {/*  {t('option.state.cancelled')}*/}
+          {/*</DataElementWrapper>*/}
           <DataElementWrapper
-            dataElement="notePopupStateCancelled"
+            dataElement="notePopupStateChangeNotification"
             className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Cancelled')}
+            onClick={createOnStateOptionButtonClickHandler('changeNotification')}
           >
-            <Icon glyph="icon-annotation-status-cancelled" />
-            {t('option.state.cancelled')}
+            {/*<Icon glyph="icon-annotation-status-completed" />*/}
+            {t('option.state.changeNotification')}
           </DataElementWrapper>
-          <DataElementWrapper
-            dataElement="notePopupStateCompleted"
-            className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Completed')}
-          >
-            <Icon glyph="icon-annotation-status-completed" />
-            {t('option.state.completed')}
-          </DataElementWrapper>
-          <DataElementWrapper
-            dataElement="notePopupStateNone"
-            className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('None')}
-          >
-            <Icon glyph="icon-annotation-status-none" />
-            {t('option.state.none')}
-          </DataElementWrapper>
-          <DataElementWrapper
-            dataElement="notePopupStateMarked"
-            className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Marked')}
-          >
-            <Icon glyph="icon-annotation-status-marked" />
-            {t('option.state.marked')}
-          </DataElementWrapper>
-          <DataElementWrapper
-            dataElement="notePopupStateUnmarked"
-            className="note-state-option"
-            onClick={createOnStateOptionButtonClickHandler('Unmarked')}
-          >
-            <Icon glyph="icon-annotation-status-unmarked" />
-            {t('option.state.unmarked')}
-          </DataElementWrapper>
+          {/*<DataElementWrapper*/}
+          {/*  dataElement="notePopupStateNone"*/}
+          {/*  className="note-state-option"*/}
+          {/*  onClick={createOnStateOptionButtonClickHandler('None')}*/}
+          {/*>*/}
+          {/*  <Icon glyph="icon-annotation-status-none" />*/}
+          {/*  {t('option.state.none')}*/}
+          {/*</DataElementWrapper>*/}
+          {/*<DataElementWrapper*/}
+          {/*  dataElement="notePopupStateMarked"*/}
+          {/*  className="note-state-option"*/}
+          {/*  onClick={createOnStateOptionButtonClickHandler('Marked')}*/}
+          {/*>*/}
+          {/*  <Icon glyph="icon-annotation-status-marked" />*/}
+          {/*  {t('option.state.marked')}*/}
+          {/*</DataElementWrapper>*/}
+          {/*<DataElementWrapper*/}
+          {/*  dataElement="notePopupStateUnmarked"*/}
+          {/*  className="note-state-option"*/}
+          {/*  onClick={createOnStateOptionButtonClickHandler('Unmarked')}*/}
+          {/*>*/}
+          {/*  <Icon glyph="icon-annotation-status-unmarked" />*/}
+          {/*  {t('option.state.unmarked')}*/}
+          {/*</DataElementWrapper>*/}
         </DataElementWrapper>
       </div>
     </PopupPortal>

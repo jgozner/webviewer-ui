@@ -873,6 +873,14 @@ export const getNotesPanelCustomHeaderOptions = (state) => state.viewer.notesPan
 
 export const getNotesPanelCustomEmptyPanel = (state) => state.viewer.notesPanelCustomEmptyPanel;
 
+export const getNotesButtonAreaOptions = (state) => state.viewer.notesButtonAreaOptions;
+
+export const getNotesStatusTagAreaOptions = (state) => state.viewer.notesStatusTagAreaOptions;
+
+export const getNotesPanelAnnotationInfo = (state) => state.viewer.notesPanelAnnotationInfo;
+
+export const getNotesPanelDocumentInfo = (state) => state.viewer.notesPanelDocumentInfo;
+
 export const isReplyAttachmentPreviewEnabled = (state) => state.viewer.replyAttachmentPreviewEnabled;
 
 export const getReplyAttachmentHandler = (state) => state.viewer.replyAttachmentHandler;

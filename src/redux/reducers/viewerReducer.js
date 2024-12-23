@@ -546,7 +546,10 @@ export default (initialState) => (state = initialState, action) => {
     case 'SET_CUSTOM_HEADERS_ADDITIONAL_PROPERTIES':
       return {
         ...state,
-        customHeadersAdditionalProperties: { ...state.customHeadersAdditionalProperties, [payload.customHeader]: payload.additionalProperties },
+        customHeadersAdditionalProperties: {
+          ...state.customHeadersAdditionalProperties,
+          [payload.customHeader]: payload.additionalProperties
+        },
       };
     case 'SET_POPUP_ITEMS':
       return {
@@ -1079,6 +1082,14 @@ export default (initialState) => (state = initialState, action) => {
       return { ...state, notesPanelCustomHeaderOptions: payload.notesPanelCustomHeaderOptions };
     case 'SET_NOTES_PANEL_CUSTOM_EMPTY_PANEL':
       return { ...state, notesPanelCustomEmptyPanel: payload.notesPanelCustomEmptyPanel };
+    case 'SET_NOTES_BUTTON_AREA_OPTIONS':
+      return { ...state, notesButtonAreaOptions: payload.notesButtonAreaOptions };
+    case 'SET_NOTES_STATUS_TAG_AREA_OPTIONS':
+      return { ...state, notesStatusTagAreaOptions: payload.notesStatusTagAreaOptions };
+    case 'SET_NOTES_PANEL_ANNOTATION_INFO':
+      return { ...state, notesPanelAnnotationInfo: payload.notesPanelAnnotationInfo };
+    case 'SET_NOTES_PANEL_DOCUMENT_INFO':
+      return { ...state, notesPanelDocumentInfo: payload.notesPanelDocumentInfo };
     case 'ADD_MEASUREMENT_SCALE_PRESET': {
       const updatedState = { ...state };
       const addIndex = payload.index || updatedState.measurementScalePreset[payload.measurementSystem].length;
