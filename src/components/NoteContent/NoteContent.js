@@ -480,10 +480,11 @@ const NoteContent = ({
   });
 
   const panelAnnotationInfo = useMemo(() => {
-    const annotInfo = customPanelAnnotationInfo ? customPanelAnnotationInfo.annotInfo : null;
+    const annotationType = annotation.getCustomData("annotationType")
+    const annotationTypeNumber = annotation.getCustomData("annotationTypeNumber")
 
-    if (annotInfo) {
-      return (<NotePanelAnnotationInfo annotInfo={annotInfo}/>);
+    if (annotationType && annotationTypeNumber) {
+      return (<NotePanelAnnotationInfo annotationType={annotationType} annotationTypeNumber={annotationTypeNumber}/>);
     }
   });
 

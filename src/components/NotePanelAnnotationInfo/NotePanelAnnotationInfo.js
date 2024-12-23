@@ -5,13 +5,12 @@ import PropTypes from 'prop-types';
 import './NotePanelAnnotationInfo.scss';
 
 const propTypes = {
-  annotInfo: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string,
-  })),
+  annotationType: PropTypes.any,
+  annotationTypeNumber: PropTypes.any
 };
 
 function NotePanelAnnotationInfo(props) {
-  const { annotInfo } = props;
+  const { annotationType, annotationTypeNumber } = props;
   const notePanelAnnotationInfoClass = classNames('NotePanelAnnotationInfo');
 
   const annotInfoStyle = {
@@ -20,7 +19,7 @@ function NotePanelAnnotationInfo(props) {
 
   return (
     <div className={notePanelAnnotationInfoClass} style={annotInfoStyle}>
-      {annotInfo && annotInfo.text}
+      {annotationType} {annotationTypeNumber}
     </div>
   );
 }

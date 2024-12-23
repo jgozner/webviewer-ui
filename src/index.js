@@ -179,6 +179,161 @@ if (window.CanvasRenderingContext2D) {
   setAutoSwitch();
   core.setToolMode(defaultTool);
 
+
+   
+  const annotationManager = documentViewer.getAnnotationManager();
+  const nodeInstance = getInstanceNode();
+
+  var annotationType = 'Change Notification'; // TODO: translate and use Enums
+  var notificationNumber = 'Nr'; // TODO: translate and use Enums
+  var status = 'Open'; // TODO: translate and use Enums
+  var annotationTypeNumber = ''; // TODO: translate and use Enums
+  var exists = 'false'; // TODO: translate and use Enums
+  var notificationId = ''; // TODO: translate and use Enums
+  var statusColor = '#baaf15'; // TODO: translate and use Enums
+  var selectedAnnotation = null;
+
+  const getStatusText = (status) => {
+    switch (status) {
+      case 1:
+        return 'Open';
+      case 2:
+        return 'InProgress';
+      case 3:
+        return 'Closed';
+      case 9:
+        return 'Irrelevant';
+      default:
+        return '';
+    }
+  }
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 1:
+        return '#FF2640';
+      case 2:
+        return '#FFD732';
+      case 3:
+        return '#E96401';
+      case 9:
+        return '#9999A9';
+      default:
+        return '#FF2640';
+    }
+  }
+
+  const handleButtonClick = () => {
+    const { annotationManager, AnnotationManager } = nodeInstance.instance.Core;
+    selectedAnnotation = annotationManager.getSelectedAnnotations();
+    updateChangeNotificationCustomValues();
+  }
+
+  const updateCustomNotificationValues = (
+    //TODO: Think of annotation type
+    notificationNumber,
+    status,
+    annotationTypeNumber,
+    notificationId,
+    statusColor
+  ) => {
+    if (selectedAnnotation.length > 0) {
+      const annotation = selectedAnnotation[0];
+      console.log(annotation);
+      annotation.setCustomData('notificationNumber', notificationNumber);
+      annotation.setCustomData('status', status);
+      annotation.setCustomData('annotationTypeNumber', annotationTypeNumber);
+      annotation.setCustomData('notificationId', notificationId);
+      annotation.setCustomData('statusColor', statusColor);
+
+      // Update the annotation's custom properties in the UI
+      setCustomProperties(annotation);
+    }
+  }
+  const updateChangeNotificationCustomValues = () => {
+    const { documentViewer } = nodeInstance.instance.Core;
+    const statusText = getStatusText(1);
+    const statusColor = getStatusColor(3);
+
+    updateCustomNotificationValues(
+      '1234567',
+      statusText,
+     '1',
+      '1',
+      statusColor
+    );
+
+    console.log('Setting the Custom Properties from Component Viewer --------------', selectedAnnotation);
+
+    setCustomProperties(selectedAnnotation[0]);
+
+    documentViewer.refreshAll();
+    documentViewer.updateView();
+  }
+
+  const setCustomProperties = (annotation) => {
+    nodeInstance.instance.UI.NotesPanel.setNoteButtonArea({
+      buttons: [
+        {
+          label: `ÄM/${annotation.getCustomData('notificationNumber')}`,
+          onClick: () => handleButtonClick(),
+          color: '#ff0000'
+        }
+      ]
+    });
+    /*
+    We don't need this as we are pulling from the custom data associated with the annotation
+
+    nodeInstance.instance.UI.NotesPanel.setNotePanelAnnotationInfo({
+      annotInfo: { text: `${annotation.getCustomData('annotationType')} ${annotation.getCustomData('annotationTypeNumber')}` }
+    });
+    */
+    nodeInstance.instance.UI.NotesPanel.setNoteStatusTagArea({
+      tag: { text: `${annotation.getCustomData('status')}`, backgroundColor: `${annotation.getCustomData('statusColor')}` }
+    });
+
+    nodeInstance.instance.Core.annotationManager.redrawAnnotation(annotation);
+  }
+  
+  const addEECustomProperties = (annotation) => {
+    // Set custom properties
+    annotation.setCustomData('annotationType', annotationType);
+    annotation.setCustomData('notificationNumber', notificationNumber);
+    annotation.setCustomData('status', status);
+    annotation.setCustomData('exists', exists);
+    annotation.setCustomData('annotationTypeNumber', annotationTypeNumber);
+    annotation.setCustomData('notificationId', notificationId);
+    annotation.setCustomData('statusColor', statusColor);
+
+    // Refresh the annotation to ensure properties are applied
+    nodeInstance.instance.Core.annotationManager.redrawAnnotation(annotation);
+  }
+
+  annotationManager.addEventListener('annotationChanged', (annotations, action, { imported }) => {
+    annotations.forEach(annotation => {
+      const exists = annotation.getCustomData('exists');
+      if (!exists || exists === 'false') {
+        console.log(annotation.Subject);
+        addEECustomProperties(annotation);
+        setCustomProperties(annotation);
+        nodeInstance.instance.Core.annotationManager.redrawAnnotation(annotation);
+      } else if (exists === 'true') {
+        const notificationNumber = annotation.getCustomData('notificationNumber');
+        const annotationType = annotation.getCustomData('annotationType');
+        const annotationTypeNumber = annotation.getCustomData('annotationTypeNumber');
+        const status = annotation.getCustomData('status');
+        const statusColor = annotation.getCustomData('statusColor');
+        console.log(`Restoring custom properties for annotation with notification number: ${notificationNumber}`);
+        console.log('Custom Data:', notificationNumber, annotationType, annotationTypeNumber, status, statusColor);
+        setCustomProperties(annotation);
+        nodeInstance.instance.Core.annotationManager.redrawAnnotation(annotation);
+      }
+      nodeInstance.instance.UI.NotesPanel.setNoteStatusTagArea({
+        tag: { text: `${annotation.getCustomData('status')}`, backgroundColor: `${annotation.getCustomData('statusColor')}` }
+      });
+    })
+  });
+
   const { addEventHandlers, removeEventHandlers } = eventHandler(store);
 
   const getWorkersToLoad = (preloadWorker) => {
